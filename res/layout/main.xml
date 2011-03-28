@@ -23,14 +23,29 @@
 	    android:textColorHint="#ffff"
 	    android:padding="5dp" android:textColor="@color/white">
     </EditText>
-    <Button android:layout_width="match_parent"
-    	android:layout_weight="0" 
-	    android:id="@+id/btnUpdateStatus" 
-	    android:text="Update Status"
-	    android:textColor="@color/black"
-	    android:layout_height="60dp" 
-	    android:textSize="30dp"
-	    android:background="@drawable/buttonbg"
-	    >
-    </Button>
+    <LinearLayout
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content">
+	    <Button android:layout_width="match_parent"
+	    	android:layout_weight="1" 
+		    android:id="@+id/btnUpdateStatus" 
+		    android:text="Update"
+		    android:textColor="@color/black"
+		    android:layout_height="60dp" 
+		    android:textSize="20dp"
+		    android:background="@drawable/buttonbg"
+		    >
+	    </Button>
+	    
+	    <Button android:layout_width="match_parent"
+	    	android:layout_weight="1" 
+		    android:id="@+id/btnTimeline" 
+		    android:text="Timeline"
+		    android:textColor="@color/black"
+		    android:layout_height="60dp" 
+		    android:textSize="18dp"
+		    android:background="@drawable/buttonbg"
+		    >
+	    </Button>
+    </LinearLayout>
 </LinearLayout>

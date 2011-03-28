@@ -3,6 +3,7 @@ package com.android.saket.twitter;
 import winterwell.jtwitter.Twitter;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Application;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -25,6 +26,7 @@ public class StatusUpdate extends Activity implements android.view.View.OnClickL
 
 	EditText mStatusMessage;
 	Button mUpdate;
+	Button mTimeLine;
 	SharedPreferences prefs;
 	Context context = StatusUpdate.this;
 	Twitter twitter;
@@ -36,8 +38,10 @@ public class StatusUpdate extends Activity implements android.view.View.OnClickL
 		setContentView(R.layout.main);
 
 		mUpdate = (Button)findViewById(R.id.btnUpdateStatus);
+		mTimeLine = (Button)findViewById(R.id.btnTimeline);
 		mStatusMessage = (EditText)findViewById(R.id.editTextStatus);
 		mUpdate.setOnClickListener(this);
+		mTimeLine.setOnClickListener(this);
 	}
 
 	@Override
@@ -69,17 +73,16 @@ public class StatusUpdate extends Activity implements android.view.View.OnClickL
 
 		int id = v.getId();
 
+		prefs = PreferenceManager.getDefaultSharedPreferences(StatusUpdate.this);
+		String username = prefs.getString("username", "n/a");
+		String password = prefs.getString("password", "n/a");
+		//Log.v(TAG, "In onClick");
+
 		switch(id){
 		case R.id.btnUpdateStatus:
 
-			prefs = PreferenceManager.getDefaultSharedPreferences(StatusUpdate.this);
-
-			String username = prefs.getString("username", "n/a");
-			String password = prefs.getString("password", "n/a");
-			Log.v(TAG, "In onClick");
-			
 			if((username == null) || (username.equals(""))){
-				Log.v(TAG, "username == null");
+				//Log.v(TAG, "username == null");
 				AlertDialog.Builder ad = new AlertDialog.Builder(context);
 				ad.setNeutralButton("Ok", new OnClickListener() {
 
@@ -96,16 +99,17 @@ public class StatusUpdate extends Activity implements android.view.View.OnClickL
 				Toast.makeText(context, "Password Missing", Toast.LENGTH_LONG).show();
 			}else{
 				try{
-					Log.v(TAG, "creating twitter object");
+					//Log.v(TAG, "creating twitter object");
 					twitter = new Twitter(username, password);
 					twitter.setAPIRootUrl("https://identi.ca/api");
 
 
 					String statusMessage = mStatusMessage.getText().toString();
-					if((statusMessage != null) && (statusMessage.length() != 0)){
+					if((statusMessage != null) && (statusMessage.length() > 0)){
 
 						twitter.setStatus(statusMessage);
 						Toast.makeText(context, "Status Posted Successfully", Toast.LENGTH_LONG).show();
+						mStatusMessage.setText("");
 						Log.v(TAG, "STATUS POSTED");
 					}else{
 						AlertDialog.Builder ad = new AlertDialog.Builder(context);
@@ -122,12 +126,19 @@ public class StatusUpdate extends Activity implements android.view.View.OnClickL
 					}
 
 				}catch (Exception e) {
-					Log.e(TAG, e.getMessage());
+					//Log.e(TAG, e.getMessage());
 					Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
 					e.printStackTrace();
 				}
 			}
-		}
-	}
+			break;
 
+		case R.id.btnTimeline:
+
+			Intent timeLine = new Intent(StatusUpdate.this, TimeLine.class);
+			startActivity(timeLine);
+			finish();
+			break;
+		}	
+	}
 }

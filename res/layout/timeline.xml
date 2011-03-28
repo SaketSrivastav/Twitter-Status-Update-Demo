@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+ <TextView
+  	xmlns:android="http://schemas.android.com/apk/res/android"
+  	android:id="@+id/timelineText"
+  	android:layout_height="wrap_content"
+  	android:layout_width="fill_parent"
+  	android:textColor="@color/black"
+  	android:background="@color/lightBlue"
+  	android:textSize="20dp"
+  	android:padding="10dp"
+ ></TextView>
+

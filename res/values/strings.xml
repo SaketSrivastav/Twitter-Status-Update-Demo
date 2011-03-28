@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="hello">Hello World, StatusUpdate!</string>
-    <string name="app_name">Status Update</string>
+    <string name="app_name">Twitter Client</string>
     
     <string name="app_title">Twitter Status Update</string>
     <string name="btnUpdateStatus">Update Status</string>
     <string name="editTexthint">Your 140 Character Message Goes Here !</string>
-    <color name="black">#000</color>
-    <color name="white">#fff</color>
+    
 </resources>
